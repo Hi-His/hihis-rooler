@@ -1,0 +1,5 @@
+server:
+  port: 0
+zookeeper:
+  connect-string: 172.16.6.155:2182
+  auth: admin:admin

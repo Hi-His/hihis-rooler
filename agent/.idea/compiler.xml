@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="agent" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="agent" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="agent" options="-verbose -bootclasspath &quot;C:/Program Files/Java/jdk1.8.0_241/jre/lib/rt.jar;C:/Program Files/Java/jdk1.8.0_241/jre/lib/jce.jar;C:/Program Files/Java/jdk1.8.0_241/jre/lib/jsse.jar;&quot;" />
+    </option>
+  </component>
+</project>

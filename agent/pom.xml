@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <groupId>com.bsoft</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
+    <artifactId>agent</artifactId>
+
+    <name>agent</name>
+    <!-- FIXME change it to the project's website -->
+    <url>http://www.example.com</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <!-- 引入 javassist 包 -->
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.27.0-GA</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>4.3.7.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+       <plugins>
+           <plugin>
+               <artifactId>maven-compiler-plugin</artifactId>
+               <configuration>
+                   <source>1.8</source>
+                   <target>1.8</target>
+                   <encoding>UTF-8</encoding>
+                   <compilerArguments>
+                       <verbose />
+                       <!-- 将jdk的依赖jar打入项目中，这样项目中使用的jdk的依赖就尅正常使用 -->
+                       <bootclasspath>${java.home}/lib/rt.jar;${java.home}/lib/jce.jar;${java.home}/lib/jsse.jar;</bootclasspath>
+                   </compilerArguments>
+               </configuration>
+           </plugin>
+           <plugin>
+               <artifactId>maven-deploy-plugin</artifactId>
+               <configuration>
+                   <skip>true</skip>
+               </configuration>
+           </plugin>
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-shade-plugin</artifactId>
+               <version>3.2.4</version>
+               <executions>
+                   <execution>
+                       <phase>package</phase>
+                       <goals>
+                           <goal>shade</goal>
+                       </goals>
+                       <configuration>
+                           <keepDependenciesWithProvidedScope>true</keepDependenciesWithProvidedScope>
+                           <promoteTransitiveDependencies>false</promoteTransitiveDependencies>
+                           <createDependencyReducedPom>true</createDependencyReducedPom>
+                           <minimizeJar>false</minimizeJar>
+                           <createSourcesJar>true</createSourcesJar>
+
+                           <transformers>
+                               <transformer
+                                       implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                   <manifestEntries>
+                                       <Premain-Class>com.bsoft.Agent</Premain-Class>
+                                   </manifestEntries>
+                               </transformer>
+                           </transformers>
+                       </configuration>
+                   </execution>
+               </executions>
+           </plugin>
+
+       </plugins>
+    </build>
+</project>
